@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PYN — Build, Learn, Create</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="auth-screen" class="auth-screen">
+    <div class="auth-shell">
+      <section class="auth-brand-panel">
+        <div class="brand light"><span class="logo-cube">P</span><span>PYN</span></div>
+        <div>
+          <span class="auth-kicker">PYTHON, BUT SOCIAL</span>
+          <h1>Build things.<br>Learn together.</h1>
+          <p>PYN is a project-first Python community where lessons, friends, videos and avatar rewards all connect.</p>
+        </div>
+        <div class="auth-preview-row">
+          <div class="mini-project">🎲<span>Dice Roller</span></div>
+          <div class="mini-project">🤖<span>Mini Bot</span></div>
+          <div class="mini-project">❓<span>Quiz Game</span></div>
+        </div>
+      </section>
+      <section class="auth-form-panel">
+        <div class="mobile-brand brand"><span class="logo-cube">P</span><span>PYN</span></div>
+        <h2>Create your PYN profile</h2>
+        <p class="muted">This prototype stores everything only in this browser.</p>
+        <label>Username</label>
+        <input id="username-input" maxlength="18" placeholder="e.g. PixelCoder" autocomplete="off" />
+        <label>Age</label>
+        <input id="age-input" type="number" min="9" max="99" placeholder="e.g. 12" />
+        <p class="age-note">PYN uses age bands so younger learners only receive friend requests from learners in their group.</p>
+        <label>Avatar</label>
+        <div class="gender-pick auth-gender-pick">
+          <button type="button" class="gender-option active" data-auth-gender="female">Female</button>
+          <button type="button" class="gender-option" data-auth-gender="male">Male</button>
+        </div>
+        <button id="start-btn" class="primary-btn wide">Create profile</button>
+        <button id="demo-btn" class="ghost-btn wide">Enter demo</button>
+        <small>For a real public launch, age checks, parental consent where required, moderation, privacy controls and legal review would still be needed.</small>
+      </section>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="site-header">
+      <div class="brand"><span class="logo-cube">P</span><span>PYN</span></div>
+      <nav id="desktop-nav">
+        <button class="nav-link active" data-page="home">Home</button>
+        <button class="nav-link" data-page="learn">Learn</button>
+        <button class="nav-link" data-page="projects">Projects</button>
+        <button class="nav-link" data-page="community">Community</button>
+      </nav>
+      <div class="header-actions">
+        <div class="header-stat">🔥 <b id="streak-count">1</b></div>
+        <div class="header-stat">⭐ <b id="xp-count">0</b> XP</div>
+        <button id="header-avatar" class="header-avatar" data-page="profile" aria-label="Open profile"></button>
+      </div>
+    </header>
+
+    <main class="page-wrap">
+      <section id="home" class="page active-page">
+        <div class="home-greeting">
+          <div><h1 id="welcome-title">Home</h1><p>Pick a project, continue learning, or see what your friends are building.</p></div>
+          <button class="outline-btn" data-page="profile">Customize avatar</button>
+        </div>
+
+        <section class="content-section first-section home-friends-section">
+          <div class="section-title-row"><div><h2>Friends</h2><p>Real PYN learners appear here. Active friends stay easy to find at the top.</p></div><button class="link-btn" data-page="community">Community</button></div>
+          <div id="people-row" class="people-scroll home-people-row"></div>
+        </section>
+
+        <section class="content-section">
+          <div class="section-title-row"><div><h2>Build something</h2><p>Start immediately. Each project teaches only what you need for that build.</p></div><button class="link-btn" data-page="projects">See all</button></div>
+          <div id="featured-projects" class="horizontal-cards project-row"></div>
+        </section>
+
+        <section class="content-section">
+          <div class="section-title-row"><div><h2>Continue learning Python</h2><p>PYN Fundamentals, from scratch. Continue opens the actual lesson.</p></div><button class="link-btn" data-page="learn">View course</button></div>
+          <div id="learning-row" class="horizontal-cards learning-row"></div>
+        </section>
+
+        <section class="content-section">
+          <div class="section-title-row"><div><h2>Watch & understand</h2><p>Short explanations for moments when reading is not enough.</p></div></div>
+          <div id="video-row" class="horizontal-cards video-row"></div>
+        </section>
+      </section>
+
+      <section id="learn" class="page">
+        <div class="page-heading"><div><span class="kicker">PYN FUNDAMENTALS</span><h1>Learn Python from scratch</h1><p>One section, clear units, tiny exams, and code you can actually use.</p></div><div class="course-progress"><strong id="course-percent">0%</strong><span>fundamentals complete</span></div></div>
+        <a class="vscode-banner" href="https://code.visualstudio.com/download" target="_blank" rel="noopener"><div><strong>Use VS Code to practice!</strong><span>Write and run the examples on your own computer.</span></div><b>Download VS Code ↗</b></a>
+        <div class="fundamentals-header"><span>SECTION 1</span><h2>PYN Fundamentals</h2><p>Start anywhere. You can open every lesson even if you have not completed the earlier units.</p></div>
+        <div id="chapters" class="chapters"></div>
+      </section>
+
+      <section id="projects" class="page">
+        <div class="page-heading"><div><span class="kicker">PROJECT LIBRARY</span><h1>What do you want to build?</h1><p>Every project shows its code. No code is locked by level.</p></div><button id="create-project-btn" class="primary-btn">+ Create a project</button></div>
+        <div class="filter-row">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="Beginner">Beginner</button>
+          <button class="filter" data-filter="Intermediate">Intermediate</button>
+          <button class="filter" data-filter="Advanced">Advanced</button>
+        </div>
+        <div id="project-grid" class="project-grid"></div>
+      </section>
+
+      <section id="community" class="page">
+        <div class="page-heading"><div><span class="kicker">COMMUNITY</span><h1>Learn with real people</h1><p>When real members join PYN, their activity, videos and friend requests can appear here.</p></div><button id="upload-video-btn" class="primary-btn">+ Share teaching video</button></div>
+        <div class="safety-banner"><b>Community safety prototype</b><span>Friend requests are limited by age band. Under-18 demo accounts do not get private text DMs in this MVP.</span></div>
+        <div class="community-grid">
+          <div>
+            <div class="subtabs"><button class="subtab active" data-community="feed">Activity</button><button class="subtab" data-community="videos">Teaching videos</button><button class="subtab" data-community="requests">Friend requests <span id="request-badge"></span></button></div>
+            <div id="community-content"></div>
+          </div>
+          <aside class="community-side">
+            <div class="side-card"><h3>Your age group</h3><strong id="age-band-label">13–15</strong><p>Friend suggestions are limited to this group.</p></div>
+            <div class="side-card"><h3>Online now</h3><div id="online-list"></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="profile" class="page">
+        <div class="profile-top">
+          <div id="profile-avatar-stage" class="avatar-stage large-stage"></div>
+          <div class="profile-intro"><span class="kicker">YOUR PROFILE</span><h1 id="profile-name">Coder</h1><p><span class="online-dot"></span> Active now · <span id="profile-band"></span></p><div class="profile-numbers"><div><b id="profile-level">1</b><span>Level</span></div><div><b id="profile-xp">0</b><span>XP</span></div><div><b id="profile-lessons">0</b><span>Lessons</span></div><div><b id="profile-projects">0</b><span>Projects</span></div></div></div>
+        </div>
+
+        <div class="profile-layout">
+          <section class="customizer-card">
+            <div class="section-title-row"><div><h2>Customize your character</h2><p>Pass tiny exams and finish projects to unlock more items.</p></div></div>
+            <div id="customizer"></div>
+          </section>
+          <aside class="inventory-card">
+            <h3>PYN Accessories</h3>
+            <div id="unlock-list"></div>
+            <hr>
+            <label>Display name</label>
+            <input id="display-name-input" maxlength="18" />
+            <button id="save-profile-btn" class="primary-btn wide">Save</button>
+            <button id="signout-btn" class="ghost-btn wide">Sign out</button>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <nav class="mobile-nav">
+      <button class="active" data-page="home">⌂<span>Home</span></button>
+      <button data-page="learn">▤<span>Learn</span></button>
+      <button data-page="projects">◆<span>Projects</span></button>
+      <button data-page="community">◉<span>Community</span></button>
+      <button data-page="profile">☺<span>You</span></button>
+    </nav>
+  </div>
+
+  <div id="modal" class="modal hidden"><div class="modal-card"><button id="modal-close" class="modal-close">×</button><div id="modal-content"></div></div></div>
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js?v=5" defer></script>
+</body>
+</html>
